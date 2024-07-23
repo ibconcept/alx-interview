@@ -1,4 +1,9 @@
-def generate_pascal_triangle(n):
+#!/usr/bin/env python3
+import sys
+
+def pascal_triangle(n):
+    assert isinstance(n, int) and n > 0, "n must be a positive integer"
+    
     triangle = []
     for i in range(n):
         row = [1] * (i + 1)
@@ -12,7 +17,20 @@ def print_pascal_triangle(triangle):
         print(' '.join(map(str, row)).center(2 * len(triangle) - 1))
 
 if __name__ == "__main__":
-    x = 5  # Replace this with any positive integer to generate more rows
-    pascal_triangle = generate_pascal_triangle(x)
-    print_pascal_triangle(pascal_triangle)
+    if len(sys.argv) != 2:
+        print("Usage: python main.py <number_of_rows>")
+        sys.exit(1)
+    
+    try:
+        n = int(sys.argv[1])
+    except ValueError:
+        print("The argument must be an integer.")
+        sys.exit(1)
+
+    try:
+        pascal_triangle = pascal_triangle(n)
+        print_pascal_triangle(pascal_triangle)
+    except AssertionError as e:
+        print(e)
+        sys.exit(1)
 
