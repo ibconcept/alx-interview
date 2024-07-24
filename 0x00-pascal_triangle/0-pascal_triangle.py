@@ -1,34 +1,28 @@
-#!/usr/bin/env python3
-import sys
+#!/usr/bin/python3
+"""pascal triangle"""
+
 
 def pascal_triangle(n):
-    assert isinstance(n, int) and n > 0, "n must be a positive integer"
-    triangle = []
-    for i in range(n):
-        row = [1] * (i + 1)
-        for j in range(1, i):
-            row[j] = triangle[i - 1][j - 1] + triangle[i - 1][j]
-        triangle.append(row)
-    return triangle
+    """Returns a list of lists of integers
+    representing the Pascals triangle of n:
+    """
 
-def print_pascal_triangle(triangle):
-    for row in triangle:
-        print(' '.join(map(str, row)).center(2 * len(triangle) - 1))
+    if n <= 0:
+        return []
 
-if __name__ == "__main__":
-    if len(sys.argv) != 2:
-        print("Usage: python main.py <number_of_rows>")
-        sys.exit(1)
-    try:
-        n = int(sys.argv[1])
-    except ValueError:
-        print("The argument must be an integer.")
-        sys.exit(1)
+    """initialize an empty resultig array"""
+    pascal = [[] for idx in range(n)]
 
-    try:
-        pascal_triangle = pascal_triangle(n)
-        print_pascal_triangle(pascal_triangle)
-    except AssertionError as e:
-        print(e)
-        sys.exit(1)
+    for li in range(n):
+        for col in range(li+1):
+            if(col < li):
+                if(col == 0):
+                    """the first column is always set to 1"""
+                    pascal[li].append(1)
+                else:
+                    pascal[li].append(pascal[li-1][col] + pascal[li-1][col-1])
+            elif(col == li):
+                """the diagonal is always set to 1"""
+                pascal[li].append(1)
 
+    return pascal
