@@ -3,7 +3,6 @@ import sys
 
 def pascal_triangle(n):
     assert isinstance(n, int) and n > 0, "n must be a positive integer"
-    
     triangle = []
     for i in range(n):
         row = [1] * (i + 1)
@@ -20,7 +19,6 @@ if __name__ == "__main__":
     if len(sys.argv) != 2:
         print("Usage: python main.py <number_of_rows>")
         sys.exit(1)
-    
     try:
         n = int(sys.argv[1])
     except ValueError:
